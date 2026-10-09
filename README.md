@@ -1,0 +1,1 @@
+# kit-solar-de-250-instalacion-y-cableado
