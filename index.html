@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tutorial para dummies: cómo instalar y cablear un kit solar de $250 paso a paso, con protecciones, consumos y mantenimiento.">
+<title>Kit Solar de $250 — Instalación y Cableado | Tutorial</title>
+<style>
+/* ============================================================
+   VARIABLES Y TEMA
+   ============================================================ */
+:root{
+  --bg:#0a0e1a;
+  --card:#0f172a;
+  --card-2:#1e3a5f;
+  --border:#24344d;
+  --text:#e6edf7;
+  --muted:#9fb0c9;
+  --accent:#38bdf8;
+  --accent-contrast:#04121f;
+  --ok:#22c55e;
+  --warn:#f59e0b;
+  --danger:#ef4444;
+  --topbar:rgba(10,14,26,.94);
+  --code-bg:#0b1222;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+html[data-theme="light"]{
+  --bg:#eef3fa;
+  --card:#ffffff;
+  --card-2:#dbe8f7;
+  --border:#c3d4e8;
+  --text:#0a1220;
+  --muted:#4a5b72;
+  --accent:#0b6ea8;
+  --accent-contrast:#ffffff;
+  --ok:#15803d;
+  --warn:#b45309;
+  --danger:#b91c1c;
+  --topbar:rgba(255,255,255,.95);
+  --code-bg:#f1f5fb;
+  --shadow:0 10px 30px rgba(15,23,42,.12);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+[hidden]{display:none !important;}
+
+html{font-size:16px;scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+}
+
+/* ============================================================
+   BARRA DE PROGRESO
+   ============================================================ */
+.progress-bar{
+  position:fixed;top:0;left:0;right:0;height:4px;z-index:200;
+  background:transparent;pointer-events:none;
+}
+.progress-bar span{
+  display:block;height:100%;width:0%;
+  background:linear-gradient(90deg,var(--accent),#22c55e);
+  transition:width .12s linear;
+}
+
+/* ============================================================
+   CABECERA
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--topbar);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+  max-width:1080px;margin:0 auto;
+  display:flex;align-items:center;gap:10px;
+  padding:8px 14px;flex-wrap:wrap;
+}
+.brand{
+  font-weight:800;font-size:.95rem;letter-spacing:.02em;
+  color:var(--text);white-space:nowrap;
+}
+.brand small{display:block;font-weight:500;font-size:.68rem;color:var(--muted);letter-spacing:.04em;}
+.tools{
+  display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap;
+}
+.tools button{
+  font:inherit;font-size:.78rem;font-weight:700;
+  padding:7px 11px;border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--card);color:var(--text);
+  cursor:pointer;transition:.15s;
+  white-space:nowrap;
+}
+.tools button:hover{border-color:var(--accent);color:var(--accent);}
+.tools button:active{transform:scale(.96);}
+
+/* ============================================================
+   BUSCADOR
+   ============================================================ */
+.search-wrap{
+  max-width:1080px;margin:0 auto;padding:8px 14px 10px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.search-wrap input{
+  flex:1 1 220px;min-width:0;
+  font:inherit;font-size:.9rem;
+  padding:10px 14px;border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--card);color:var(--text);
+}
+.search-wrap input:focus{outline:2px solid var(--accent);outline-offset:1px;}
+.search-count{font-size:.78rem;color:var(--muted);white-space:nowrap;}
+mark.search-hl{
+  background:#fde047;color:#111;border-radius:3px;padding:0 2px;
+}
+
+/* ============================================================
+   PESTAÑAS
+   ============================================================ */
+.tabs{
+  max-width:1080px;margin:0 auto;
+  display:flex;gap:6px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  padding:0 14px 10px;
+  scrollbar-width:thin;
+}
+.tabs::-webkit-scrollbar{height:5px;}
+.tabs::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
+.tab{
+  flex:0 0 auto;
+  font:inherit;font-size:.74rem;font-weight:800;letter-spacing:.05em;
+  padding:9px 15px;border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--card);color:var(--muted);
+  cursor:pointer;white-space:nowrap;transition:.15s;
+}
+.tab:hover{color:var(--text);border-color:var(--accent);}
+.tab.active{
+  background:var(--accent);color:var(--accent-contrast);
+  border-color:var(--accent);
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.wrap{max-width:1080px;margin:0 auto;padding:20px 14px 90px;}
+.panel{display:none;}
+.panel.active{display:block;animation:fade .28s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+h1{font-size:1.72rem;line-height:1.22;margin:.2em 0 .35em;letter-spacing:-.01em;}
+h2{font-size:1.32rem;margin:1.7em 0 .5em;line-height:1.25;letter-spacing:-.01em;}
+h3{font-size:1.08rem;margin:1.35em 0 .4em;}
+h4{font-size:.96rem;margin:1.1em 0 .35em;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+p{margin:.65em 0;}
+ul,ol{margin:.6em 0;padding-left:1.25em;}
+li{margin:.32em 0;}
+strong{color:var(--text);}
+a{color:var(--accent);}
+
+.lead{font-size:1.05rem;color:var(--muted);}
+.hero-caption{
+  text-align:center;font-size:.82rem;color:var(--muted);
+  margin:-6px 0 22px;letter-spacing:.02em;
+}
+
+/* ============================================================
+   SVG HERO
+   ============================================================ */
+.hero-svg-mount{
+  width:100%;margin:0 auto 10px;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#0b1222;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  min-height:60px;
+}
+.hero-svg-mount svg{display:block;width:100%;height:auto;}
+.hero-svg-mount img{display:block;width:100%;height:auto;}
+
+/* ============================================================
+   TARJETAS Y BLOQUES
+   ============================================================ */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px 18px;
+  margin:14px 0;
+  box-shadow:var(--shadow);
+}
+.card h3:first-child,.card h2:first-child{margin-top:0;}
+.grid{display:grid;gap:14px;grid-template-columns:1fr;}
+@media(min-width:720px){.grid.two{grid-template-columns:1fr 1fr;}}
+
+.callout{
+  border-left:4px solid var(--accent);
+  background:var(--card);
+  border-radius:0 12px 12px 0;
+  padding:12px 16px;margin:14px 0;
+}
+.callout.ok{border-left-color:var(--ok);}
+.callout.warn{border-left-color:var(--warn);}
+.callout.danger{border-left-color:var(--danger);}
+.callout strong{display:block;margin-bottom:2px;}
+
+.step{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-left:4px solid var(--accent);
+  border-radius:0 12px 12px 0;
+  padding:14px 16px;margin:16px 0;
+}
+.step h3{margin-top:0;}
+.step .goal{
+  display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.06em;
+  background:var(--card-2);color:var(--text);
+  border-radius:999px;padding:3px 10px;margin-bottom:6px;
+}
+.step ol{counter-reset:none;}
+
+.badge{
+  display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.05em;
+  padding:3px 9px;border-radius:999px;
+  background:var(--card-2);color:var(--text);margin-right:6px;
+}
+.badge.ok{background:rgba(34,197,94,.16);color:var(--ok);}
+.badge.warn{background:rgba(245,158,11,.16);color:var(--warn);}
+.badge.danger{background:rgba(239,68,68,.16);color:var(--danger);}
+
+/* ============================================================
+   TABLAS
+   ============================================================ */
+.table-wrap{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  margin:14px 0;border:1px solid var(--border);border-radius:12px;
+}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.92rem;}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top;}
+th{background:var(--card-2);color:var(--text);font-weight:800;font-size:.82rem;letter-spacing:.03em;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:nth-child(even){background:rgba(255,255,255,.025);}
+html[data-theme="light"] tbody tr:nth-child(even){background:rgba(15,23,42,.03);}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;}
+tr.row-danger td{color:var(--danger);font-weight:700;}
+tr.row-ok td:last-child{color:var(--ok);font-weight:600;}
+
+/* ============================================================
+   PRE / CÓDIGO / COPIAR
+   ============================================================ */
+pre{
+  background:var(--code-bg);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:13px 15px;
+  margin:0;
+  overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  font-size:.82rem;line-height:1.55;
+  white-space:pre-wrap;word-break:break-word;
+  color:var(--text);
+}
+.copy-wrap{position:relative;margin:14px 0;}
+.copy-wrap .copyBtn{
+  display:inline-block;margin-top:8px;
+  font:inherit;font-size:.74rem;font-weight:800;letter-spacing:.06em;
+  padding:8px 16px;border-radius:999px;
+  border:1px solid var(--accent);
+  background:transparent;color:var(--accent);
+  cursor:pointer;transition:.15s;
+}
+.copy-wrap .copyBtn:hover{background:var(--accent);color:var(--accent-contrast);}
+.copy-wrap .copyBtn.ok{background:var(--ok);border-color:var(--ok);color:#04121f;}
+
+.diagram{
+  background:var(--code-bg);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;margin:14px 0;
+  overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.76rem;line-height:1.5;color:var(--muted);
+  white-space:pre;
+}
+
+/* ============================================================
+   CHECKLIST
+   ============================================================ */
+.check-list{list-style:none;padding:0;margin:14px 0;}
+.check-list li{
+  display:flex;gap:10px;align-items:flex-start;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:11px 13px;margin:8px 0;
+}
+.check-list input[type="checkbox"]{
+  flex:0 0 auto;width:20px;height:20px;margin-top:2px;
+  accent-color:var(--accent);cursor:pointer;
+}
+.check-list label{cursor:pointer;font-size:.94rem;}
+.check-list input:checked + label{color:var(--muted);text-decoration:line-through;}
+
+.progress-box{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:13px 16px;margin:16px 0;
+}
+.progress-label{font-size:.82rem;color:var(--muted);margin-bottom:8px;}
+.progress-track{height:10px;border-radius:999px;background:var(--border);overflow:hidden;}
+.progress-track span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--ok));transition:width .3s ease;}
+
+/* ============================================================
+   DESPLEGABLES
+   ============================================================ */
+details{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:0;margin:12px 0;
+  overflow:hidden;
+}
+details > summary{
+  cursor:pointer;list-style:none;
+  padding:13px 16px;
+  font-weight:700;font-size:.95rem;
+  display:flex;align-items:center;gap:10px;
+  user-select:none;
+}
+details > summary::-webkit-details-marker{display:none;}
+details > summary::before{
+  content:"▸";flex:0 0 auto;color:var(--accent);
+  transition:transform .2s;font-size:.9rem;
+}
+details[open] > summary::before{transform:rotate(90deg);}
+details[open] > summary{border-bottom:1px solid var(--border);}
+details .details-body{padding:14px 16px;}
+
+/* ============================================================
+   CRÉDITOS
+   ============================================================ */
+.author-card{
+  background:var(--card);
+  border:1px solid var(--accent);
+  border-radius:var(--radius);
+  padding:26px 20px;
+  margin:20px 0;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+.author-name{
+  font-size:2rem;line-height:1.15;margin:0 0 6px;
+  font-weight:900;letter-spacing:-.02em;
+  color:var(--accent);
+}
+.author-role{
+  font-size:1rem;color:var(--muted);margin:0 0 20px;
+  letter-spacing:.06em;text-transform:uppercase;font-weight:700;
+}
+.meta{
+  display:grid;gap:12px;margin:0;text-align:left;
+  border-top:1px solid var(--border);padding-top:18px;
+}
+.meta > div{
+  display:flex;flex-direction:column;gap:2px;
+}
+.meta dt{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:800;}
+.meta dd{margin:0;font-size:.95rem;font-weight:700;font-variant-numeric:tabular-nums;}
+
+/* ============================================================
+   AVISOS
+   ============================================================ */
+.notice{
+  background:rgba(245,158,11,.12);
+  border:1px solid var(--warn);
+  border-radius:12px;
+  padding:12px 16px;margin:12px 0;
+  font-size:.88rem;color:var(--text);
+}
+
+/* ============================================================
+   VOLVER ARRIBA
+   ============================================================ */
+.to-top{
+  position:fixed;right:16px;bottom:18px;z-index:150;
+  width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--accent);
+  background:var(--card);color:var(--accent);
+  font-size:1.3rem;font-weight:800;
+  cursor:pointer;display:none;
+  align-items:center;justify-content:center;
+  box-shadow:var(--shadow);
+}
+.to-top.show{display:flex;}
+.to-top:hover{background:var(--accent);color:var(--accent-contrast);}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:480px){
+  h1{font-size:1.45rem;}
+  h2{font-size:1.18rem;}
+  .wrap{padding:16px 12px 80px;}
+  .tools button{padding:6px 9px;font-size:.72rem;}
+  .author-name{font-size:1.6rem;}
+}
+@media(min-width:860px){
+  h1{font-size:2.05rem;}
+  .wrap{padding:28px 20px 100px;}
+}
+
+/* ============================================================
+   IMPRESIÓN / PDF
+   ============================================================ */
+@media print{
+  @page{size:A4 portrait;margin:14mm 12mm;}
+
+  html,body{
+    background:#ffffff !important;
+    color:#000000 !important;
+    padding:0 !important;
+    margin:0 !important;
+    font-size:11pt !important;
+    overflow:visible !important;
+  }
+
+  :root,html[data-theme="dark"],html[data-theme="light"]{
+    --bg:#ffffff;--card:#ffffff;--card-2:#eef2f7;--border:#8fa1b8;
+    --text:#000000;--muted:#334155;--accent:#0b4a6f;--accent-contrast:#ffffff;
+    --ok:#14532d;--warn:#78350f;--danger:#7f1d1d;--shadow:none;--code-bg:#f4f6f9;
+  }
+
+  .toolbar,.tabs,.to-top,.copyBtn,.progress-bar,nav,.search-wrap,.no-print{display:none !important;}
+
+  mark.search-hl{background:transparent !important;color:inherit !important;padding:0 !important;}
+
+  .panel{
+    display:block !important;
+    page-break-after:auto !important;
+    break-after:auto !important;
+    animation:none !important;
+  }
+
+  pre,table,.table-wrap,.diagram{
+    overflow:visible !important;
+    white-space:pre-wrap !important;
+    word-break:break-word !important;
+  }
+  .diagram{white-space:pre-wrap !important;}
+
+  .card,.step,.callout,.author-card,.progress-box,.check-list li,details,
+  table,th,td,.copy-wrap pre,.diagram{
+    background:#ffffff !important;
+    color:#000000 !important;
+    border-color:#8fa1b8 !important;
+    box-shadow:none !important;
+  }
+
+  th{background:#e6ebf2 !important;color:#000000 !important;}
+
+  h1,h2,h3,h4,.author-name,.brand{color:#000000 !important;}
+  .author-name{color:#0b4a6f !important;}
+
+  .hero-svg-mount{
+    border:1px solid #8fa1b8 !important;
+    background:#ffffff !important;
+    page-break-inside:avoid;
+    break-inside:avoid;
+    margin-bottom:6mm;
+  }
+  .hero-svg-mount svg{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+
+  details{break-inside:avoid;}
+  details > summary{border-bottom:1px solid #8fa1b8 !important;}
+  details > summary::before{color:#000000 !important;}
+
+  a{color:#000000 !important;text-decoration:underline;}
+
+  .check-list input[type="checkbox"]{accent-color:#000000;}
+  .check-list input:checked + label{color:#000000 !important;text-decoration:none !important;}
+
+  h2{page-break-after:avoid;break-after:avoid;}
+  table{page-break-inside:auto;}
+  tr{page-break-inside:avoid;break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     BARRA DE PROGRESO DE LECTURA
+     ============================================================ -->
+<div class="progress-bar" aria-hidden="true"><span id="progressFill"></span></div>
+
+<!-- ============================================================
+     CABECERA FIJA
+     ============================================================ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">☀️ Kit Solar $250<small>Tutorial de instalación</small></div>
+    <div class="tools">
+      <button type="button" id="btnSearch" aria-label="Buscar en el tutorial">🔍 BUSCAR</button>
+      <button type="button" id="btnMinus" aria-label="Reducir tamaño del texto">A−</button>
+      <button type="button" id="btnPlus" aria-label="Aumentar tamaño del texto">A+</button>
+      <button type="button" id="btnTheme" aria-label="Cambiar tema claro u oscuro">🌙 TEMA</button>
+      <button type="button" id="btnPrint" aria-label="Imprimir o guardar como PDF">🖨️ PDF</button>
+    </div>
+  </div>
+
+  <div class="search-wrap" id="searchWrap" hidden>
+    <input type="search" id="searchInput" placeholder="Buscar: batería, breaker, cable 16 mm²…" aria-label="Buscar en el tutorial">
+    <span class="search-count" id="searchCount"></span>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Secciones del tutorial">
+    <button class="tab active" type="button" role="tab" id="t-inicio"        data-tab="inicio"        aria-selected="true"  aria-controls="p-inicio">INICIO</button>
+    <button class="tab"        type="button" role="tab" id="t-conceptos"     data-tab="conceptos"     aria-selected="false" aria-controls="p-conceptos">CONCEPTOS</button>
+    <button class="tab"        type="button" role="tab" id="t-procedimiento" data-tab="procedimiento" aria-selected="false" aria-controls="p-procedimiento">PROCEDIMIENTO</button>
+    <button class="tab"        type="button" role="tab" id="t-energia"       data-tab="energia"       aria-selected="false" aria-controls="p-energia">ENERGÍA</button>
+    <button class="tab"        type="button" role="tab" id="t-practica"      data-tab="practica"      aria-selected="false" aria-controls="p-practica">PRÁCTICA</button>
+    <button class="tab"        type="button" role="tab" id="t-errores"       data-tab="errores"       aria-selected="false" aria-controls="p-errores">ERRORES</button>
+    <button class="tab"        type="button" role="tab" id="t-resumen"       data-tab="resumen"       aria-selected="false" aria-controls="p-resumen">RESUMEN</button>
+    <button class="tab"        type="button" role="tab" id="t-fuentes"       data-tab="fuentes"       aria-selected="false" aria-controls="p-fuentes">FUENTES</button>
+    <button class="tab"        type="button" role="tab" id="t-creditos"      data-tab="creditos"      aria-selected="false" aria-controls="p-creditos">CRÉDITOS</button>
+  </nav>
+</header>
+
+<div class="notice no-print" id="printNotice" hidden>
+  ⚠️ <strong>Si el diálogo de impresión no se abre:</strong> abre este archivo directamente en el navegador (no dentro de un visor o previsualizador) y pulsa <strong>Ctrl+P</strong> / <strong>Cmd+P</strong>.
+</div>
+
+<main class="wrap" id="main">
+
+<!-- ================================================================
+     PANEL: INICIO
+     ================================================================ -->
+<section class="panel active" id="p-inicio" role="tabpanel" aria-labelledby="t-inicio">
+
+  <div class="hero-svg-mount" data-svg-hero="true" role="img"
+       aria-label="Esquema animado: el sol ilumina el panel solar, la energía viaja por el cable hasta el controlador de carga, carga la batería y finalmente alimenta la casa."></div>
+  <p class="hero-caption">Sol → Panel → Controlador → Batería → Casa. Todo el kit en una sola imagen.</p>
+
+  <h1>Kit Solar de $250: instalación y cableado</h1>
+  <p class="lead">Tutorial completo para armar tu propio respaldo de energía desde cero, sin conocimientos previos de electricidad.</p>
+
+  <div class="card">
+    <h3>¿Qué vas a aprender?</h3>
+    <ul>
+      <li>Qué es un kit solar aislado y qué puedes (y qué <strong>no</strong> puedes) enchufarle.</li>
+      <li>Cuáles son los <strong>6 componentes</strong> del kit de $250 y para qué sirve cada uno.</li>
+      <li>El <strong>orden exacto</strong> de conexión, que es lo que evita quemar el controlador o el inversor.</li>
+      <li>Qué grosor de cable y qué breaker van en cada tramo.</li>
+      <li>Cómo calcular cuántas horas te dura la batería de noche.</li>
+      <li>Los errores que <strong>nunca</strong> debes cometer.</li>
+    </ul>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <h3>¿Para qué sirve este kit?</h3>
+      <p>Para tener <strong>energía de respaldo autónoma</strong> durante apagones o cortes prolongados. Alimenta lo esencial: iluminación LED, internet, carga de celular, ventilador y equipos de trabajo livianos.</p>
+      <p>El kit completo cuesta <strong>$250</strong> y reemplaza funciones por las que un presupuesto comercial profesional puede superar los <strong>$1.800</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>¿Por qué aprender a instalarlo tú mismo?</h3>
+      <ul>
+        <li><strong>Autonomía:</strong> no dependes de un técnico cada vez que falla algo.</li>
+        <li><strong>Ahorro:</strong> pagas los componentes, no la mano de obra.</li>
+        <li><strong>Seguridad:</strong> entiendes cada cable y evitas incendios por conexiones mal hechas.</li>
+        <li><strong>Mantenimiento:</strong> detectas fallas en minutos, no en días.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>¿Qué necesitas antes de empezar?</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Necesitas</th><th>Para qué</th><th>¿Imprescindible?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Los 6 componentes del kit</td><td>Es el sistema en sí</td><td><span class="badge danger">SÍ</span></td></tr>
+        <tr><td>Multímetro (tester)</td><td>Verificar voltajes antes de energizar</td><td><span class="badge danger">SÍ</span></td></tr>
+        <tr><td>Llave fija / destornillador</td><td>Apretar bornes y terminales</td><td><span class="badge danger">SÍ</span></td></tr>
+        <tr><td>Pinza ponchadora de terminales</td><td>Prensar los terminales de ojal</td><td><span class="badge warn">Muy recomendable</span></td></tr>
+        <tr><td>Pinza amperimétrica CC</td><td>Medir consumos reales</td><td><span class="badge">Opcional</span></td></tr>
+        <tr><td>Gafas de protección</td><td>Seguridad ante chispazos</td><td><span class="badge warn">Recomendable</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Objetivos del tutorial</h2>
+  <ol>
+    <li>Identificar los 6 componentes y su función dentro del sistema.</li>
+    <li>Respetar las 3 reglas de oro de seguridad eléctrica.</li>
+    <li>Ejecutar el cableado en el orden cronológico correcto.</li>
+    <li>Verificar el sistema con multímetro antes y después de energizar.</li>
+    <li>Gestionar los consumos para no destruir la batería.</li>
+    <li>Planificar una ampliación futura sin comprar dos veces.</li>
+  </ol>
+
+  <h2>Cómo usar este tutorial</h2>
+  <div class="card">
+    <ol>
+      <li><strong>Lee las pestañas en orden.</strong> Cada una se apoya en la anterior.</li>
+      <li><strong>Usa el buscador</strong> (🔍) cuando quieras encontrar algo concreto: "breaker", "16 mm²", "DPS"…</li>
+      <li><strong>Ajusta el tamaño del texto</strong> con A− / A+ si te resulta cómodo.</li>
+      <li><strong>Cambia el tema</strong> con el botón 🌙 TEMA (oscuro / claro).</li>
+      <li><strong>Marca los checklists.</strong> Tu progreso se guarda solo en este navegador.</li>
+      <li><strong>Imprime o guarda en PDF</strong> con el botón 🖨️ PDF. Sirve para llevarlo al techo o al taller.</li>
+    </ol>
+  </div>
+
+  <div class="callout warn">
+    <strong>Antes de tocar un solo cable</strong>
+    Este tutorial describe un sistema de <strong>12 V de corriente continua</strong> que, mal conectado, puede fundir metal, provocar incendios y dañar equipos de forma irreversible. Lee la pestaña <em>PROCEDIMIENTO</em> completa antes de empezar.
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: CONCEPTOS
+     ================================================================ -->
+<section class="panel" id="p-conceptos" role="tabpanel" aria-labelledby="t-conceptos">
+
+  <h1>Conceptos: los 6 componentes del kit</h1>
+  <p class="lead">Antes de cablear hay que entender <strong>qué es cada pieza</strong> y <strong>por qué está ahí</strong>.</p>
+
+  <h2>Tabla general del kit ($250)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Componente</th><th>Especificación</th><th>Precio</th><th>Grosor de cable asociado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Panel Solar</td><td>150 W (policristalino)</td><td class="num">$62</td><td>6 mm²</td></tr>
+        <tr><td>Controlador de Carga</td><td>PWM 40 A</td><td class="num">$19</td><td>10 mm²</td></tr>
+        <tr><td>Batería</td><td>Ciclo Profundo 60 Ah / 12 V</td><td class="num">$89</td><td>10 mm² / 16 mm²</td></tr>
+        <tr><td>Inversor</td><td>1000 W (onda modificada)</td><td class="num">$48</td><td>16 mm²</td></tr>
+        <tr><td>Protecciones</td><td>Breakers CC + DPS</td><td class="num">$18</td><td>—</td></tr>
+        <tr><td>Cableado y accesorios</td><td>Terminales, fusible, conectores MC4</td><td class="num">$14</td><td>—</td></tr>
+        <tr><td><strong>TOTAL</strong></td><td><strong>Sistema completo</strong></td><td class="num"><strong>$250</strong></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>1. Panel Solar (150 W) — $62</h2>
+  <div class="card">
+    <p><strong>Qué es:</strong> el encargado de transformar la radiación solar en electricidad de corriente continua (CC). Tiene marco de aluminio y caja de conexiones trasera.</p>
+    <p><strong>Para qué sirve:</strong> es la única fuente de energía del sistema. Todo lo que consumas sale, tarde o temprano, de aquí.</p>
+    <p><strong>Dato clave — rendimiento real vs. teórico:</strong> aunque la etiqueta diga 150 W, en un techo real con calor ambiental entrega en promedio <strong>118 W reales</strong> al mediodía. Es una pérdida normal del <strong>20 %</strong> por temperatura respecto a las pruebas de laboratorio.</p>
+    <div class="callout warn">
+      <strong>No te asustes con esa pérdida</strong>
+      Es normal y está contemplada en todos los cálculos de este tutorial. Nunca dimensiones un sistema contando con la potencia de la etiqueta.
+    </div>
+  </div>
+
+  <h2>2. Controlador de Carga PWM (40 A) — $19</h2>
+  <div class="card">
+    <p><strong>Qué es:</strong> el "cerebro" regulador del sistema. Es el intermediario entre el panel y la batería.</p>
+    <p><strong>Para qué sirve:</strong> toma la energía del panel y la inyecta de forma controlada en la batería. Si la batería está llena, frena la carga. Si está descargada, habilita el paso de corriente.</p>
+    <p><strong>¿Por qué de 40 A si alcanzaría con 20 A?</strong> La diferencia de costo es de solo $5, y un modelo de 40 A permite conectar hasta <strong>3 paneles solares iguales</strong> en el futuro sin tener que desechar el equipo.</p>
+  </div>
+
+  <h2>3. Batería de Ciclo Profundo (12 V / 60 Ah) — $89</h2>
+  <div class="card">
+    <p><strong>Qué es:</strong> el corazón del sistema y el componente de mayor valor. Almacena la energía producida de día para usarla de noche.</p>
+    <h4>Correcto vs. incorrecto</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Batería de auto</th><th>Batería de ciclo profundo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Diseño</strong></td><td>Golpe fuerte de corriente de pocos segundos</td><td>Descargas lentas y sostenidas durante horas</td></tr>
+          <tr><td><strong>Uso solar</strong></td><td class="row-danger">Incorrecto: se destruye en poco tiempo</td><td class="row-ok">Correcto: es la que corresponde</td></tr>
+          <tr><td><strong>Recarga</strong></td><td>Inmediata, del alternador</td><td>Lenta, del panel solar</td></tr>
+          <tr><td><strong>Resultado</strong></td><td>Se sulfata y muere en semanas</td><td>500 ciclos bien cuidados</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>4. Inversor de Corriente (1000 W) — $48</h2>
+  <div class="card">
+    <p><strong>Qué es:</strong> convierte los 12 V de corriente continua (CC) de la batería en 120 V / 220 V de corriente alterna (CA), que es lo que usan los electrodomésticos convencionales.</p>
+    <p><strong>Margen de seguridad del 70 %:</strong> aunque la caja diga 1000 W nominales, el uso continuo seguro es de hasta <strong>700 W</strong>. Por encima de eso se sobrecalienta.</p>
+    <p><strong>Autoconsumo:</strong> consume <strong>10 W solo por estar encendido</strong>, aunque no tenga nada enchufado. Es uno de los datos más importantes de todo el tutorial.</p>
+  </div>
+
+  <h2>5. Protecciones Eléctricas (Breakers CC + DPS) — $18</h2>
+  <div class="card">
+    <p>Evitan incendios y daños irreparables en caso de cortocircuitos o descargas atmosféricas. El paquete incluye:</p>
+    <ul>
+      <li><strong>Breaker CC de 16 A</strong> → para la línea del panel solar.</li>
+      <li><strong>Breaker CC de 63 A</strong> → para la línea del inversor.</li>
+      <li><strong>Protector de Sobretensión (DPS)</strong> → con conexión a tierra física (varilla / jabalina).</li>
+    </ul>
+  </div>
+
+  <h2>6. Cableado, Terminales de Ojal y Fusible — $14</h2>
+  <div class="card">
+    <p>Conductores de cobre de alta capacidad y conectores mecánicos aislados. <strong>Nunca</strong> se usa cable pelado enroscado a mano en un borne.</p>
+  </div>
+
+  <h2>Analogía: el kit es un tanque de agua elevado</h2>
+  <div class="diagram">   LLUVIA  ──────►  PANEL SOLAR            (capta la energía)
+      │
+   VÁLVULA  ──────►  CONTROLADOR DE CARGA   (regula la entrada, no deja desbordar)
+      │
+   TANQUE   ──────►  BATERÍA 60 Ah          (almacena lo captado)
+      │
+   BOMBA    ──────►  INVERSOR               (adapta la "presión" para que salga por las canillas)
+      │
+   CAÑERÍA  ──────►  BREAKERS Y CABLES      (tubería resistente y llaves de paso)
+      │
+   CANILLA  ──────►  TOMACORRIENTES         (tus aparatos eléctricos)</div>
+
+  <div class="grid two">
+    <div class="card">
+      <h3>Entonces… ¿por qué importa?</h3>
+      <p>Porque si te salteas la válvula (controlador), el tanque se desborda. Si la cañería es fina (cable delgado), revienta. Cada pieza existe por una razón concreta.</p>
+    </div>
+    <div class="card">
+      <h3>Resumen del capítulo</h3>
+      <ul>
+        <li>El kit cuesta exactamente <strong>$250</strong> y suministra energía básica autónoma.</li>
+        <li>El panel rinde en la realidad un <strong>20 % menos</strong> (118 W netos).</li>
+        <li>La batería <strong>debe</strong> ser de ciclo profundo.</li>
+        <li>El controlador de 40 A permite triplicar el sistema sin compras dobles.</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: PROCEDIMIENTO
+     ================================================================ -->
+<section class="panel" id="p-procedimiento" role="tabpanel" aria-labelledby="t-procedimiento">
+
+  <h1>Procedimiento: del cable al sistema funcionando</h1>
+  <p class="lead">Primero las reglas de seguridad. Después el orden cronológico exacto. Alterar la secuencia puede averiar los equipos.</p>
+
+  <h2>Las 3 reglas de oro</h2>
+
+  <div class="step">
+    <span class="goal">REGLA 1</span>
+    <h3>Breakers ABAJO (apagados) durante toda la instalación</h3>
+    <p><strong>Regla:</strong> todos los interruptores termomagnéticos deben permanecer abajo (apagados) durante todo el proceso de armado. Solo se suben al finalizar la inspección visual y eléctrica completa.</p>
+    <p><strong>Motivo:</strong> evita chispazos, arcos eléctricos o alimentación accidental de circuitos que estás manipulando con las manos.</p>
+  </div>
+
+  <div class="step">
+    <span class="goal">REGLA 2</span>
+    <h3>Polaridad estrictamente directa</h3>
+    <p><strong>Regla:</strong> lo que entra positivo (+) debe salir positivo (+); lo que entra negativo (−) debe salir negativo (−).</p>
+    <p><strong>Motivo:</strong> si inviertes los cables entre la batería y el inversor o el controlador, se produce un <strong>cortocircuito directo de batería</strong>. Una batería de plomo descargando su energía en cortocircuito derrite el metal y destruye los equipos en milisegundos.</p>
+  </div>
+
+  <div class="step">
+    <span class="goal">REGLA 3</span>
+    <h3>Terminales de ojal y grosor de cable correcto</h3>
+    <p><strong>Regla:</strong> cables sueltos o pelados enroscados en pernos están <strong>prohibidos</strong>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tramo</th><th>Grosor de cable</th><th>Por qué</th></tr></thead>
+        <tbody>
+          <tr><td>Panel → Controlador</td><td class="num"><strong>6 mm²</strong></td><td>Corriente moderada, tirada larga desde el techo</td></tr>
+          <tr><td>Batería → Controlador</td><td class="num"><strong>10 mm²</strong></td><td>Corriente de carga media</td></tr>
+          <tr><td>Batería → Inversor</td><td class="num"><strong>16 mm²</strong></td><td>La corriente más alta de todo el kit</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Ejemplo correcto e incorrecto</h4>
+    <div class="grid two">
+      <div class="callout danger">
+        <strong>❌ Incorrecto</strong>
+        Pelar el cable de cobre, enroscarlo con los dedos alrededor del tornillo del inversor y apretar. Con la vibración o el paso de corriente alta se afloja, genera chispa y calienta hasta quemar la aislación.
+      </div>
+      <div class="callout ok">
+        <strong>✅ Correcto</strong>
+        Colocar un terminal de ojal metálico en la punta del cable de 16 mm², poncharlo (prensarlo) firmemente y ajustarlo con llave fija. Un tornillo flojo en la batería puede alcanzar temperaturas peligrosas al tacto en menos de una hora.
+      </div>
+    </div>
+  </div>
+
+  <h2>Esquema general de conexión</h2>
+  <div class="diagram">                  [ Panel Solar 150 W ]
+                            │
+                      (Cable 6 mm²)
+                            │
+                  [ Breaker CC 16 A ]
+                            │
+        ┌───────────────────┴───────────────────┐
+        │                                       │
+  [ DPS Protector ] ──► (Varilla de tierra)    │
+        │                                       │
+        └───────────────┬───────────────────────┘
+                        │
+              [ Controlador PWM 40 A ]
+                        │
+                  (Cable 10 mm²)
+                        │
+                 [ Batería 60 Ah ]
+                        │
+                  (Cable 16 mm²)
+                        │
+                [ Breaker CC 63 A ]
+                        │
+                [ Inversor 1000 W ]
+                        │
+        Salida 120 V / 220 V CA ──► Consumos</div>
+
+  <h2>Orden obligatorio de instalación</h2>
+  <div class="callout danger">
+    <strong>1.º Batería → Controlador &nbsp;|&nbsp; 2.º Batería → Inversor &nbsp;|&nbsp; 3.º Panel → Controlador</strong>
+    El regulador <strong>debe</strong> detectar los 12 V de la batería antes de recibir carga del panel. Si se conecta el panel primero, el controlador no sabe qué voltaje procesar y se puede dañar o descalibrar.
+  </div>
+
+  <!-- PASO 1 -->
+  <div class="step">
+    <span class="goal">PASO 1</span>
+    <h3>Conectar la Batería al Controlador de Carga</h3>
+    <p><strong>Objetivo:</strong> alimentar la lógica interna del controlador antes de ingresar energía solar.</p>
+    <p><strong>Materiales:</strong> cable de 10 mm², controlador PWM de 40 A y batería de ciclo profundo de 60 Ah.</p>
+    <p><strong>Motivo:</strong> el controlador necesita detectar el voltaje de la batería (12 V) para autoconfigurarse.</p>
+    <ol>
+      <li>Verifica que todos los breakers estén apagados (abajo).</li>
+      <li>Toma el cable <strong>negro</strong> de 10 mm² y conéctalo al puerto negativo (−) del controlador, marcado con el icono de batería. Ajusta el tornillo con firmeza.</li>
+      <li>Toma el cable <strong>rojo</strong> de 10 mm² y conéctalo al puerto positivo (+) de batería en el controlador.</li>
+      <li>En el extremo de la batería, conecta <strong>primero</strong> el cable negro al borne negativo (−).</li>
+      <li>Finalmente, conecta el cable rojo al borne positivo (+) de la batería.</li>
+      <li>Observa la pantalla del controlador.</li>
+    </ol>
+    <div class="callout ok">
+      <strong>Resultado esperado</strong>
+      Al tocar el borne positivo, la pantalla del controlador se enciende sola y muestra el voltaje actual de la batería (por ejemplo: <strong>12,7 V</strong>). Eso confirma que el Paso 1 fue exitoso.
+    </div>
+    <div class="callout warn">
+      <strong>Si algo sale mal</strong>
+      Si la pantalla no enciende, revisa en este orden: (1) que el cable negro esté bien apretado en el borne negativo; (2) que el cable rojo esté en el borne correcto, no en el del panel; (3) que la batería tenga carga (mide con el multímetro: debe marcar más de 11,8 V).
+    </div>
+  </div>
+
+  <!-- PASO 2 -->
+  <div class="step">
+    <span class="goal">PASO 2</span>
+    <h3>Conectar la Batería al Inversor pasando por el Breaker de 63 A</h3>
+    <p><strong>Objetivo:</strong> crear la línea de alta potencia que transforma corriente continua en corriente alterna, con protección térmica manual.</p>
+    <p><strong>Materiales:</strong> cable de 16 mm², terminales de ojal, breaker de corriente continua de 63 A e inversor de 1000 W.</p>
+    <p><strong>Motivo:</strong> el inversor demanda picos de corriente elevados. El cable de 16 mm² evita caídas de voltaje y sobrecalentamientos. El breaker de 63 A permite aislar el inversor ante fallas o para mantenimiento.</p>
+    <ol>
+      <li>Coloca terminales de ojal en todos los extremos del cable de 16 mm².</li>
+      <li>Conecta un tramo de cable rojo (+) desde el borne positivo de la batería hacia la entrada superior del polo positivo del breaker de 63 A.</li>
+      <li>Conecta otro tramo de cable rojo (+) desde la salida inferior de ese mismo polo del breaker hacia el terminal positivo (+) del inversor.</li>
+      <li>Repite la operación para la línea negativa (−): cable negro desde el borne negativo de la batería hacia la entrada superior del otro polo del breaker, y de la salida inferior del breaker al puerto negativo (−) del inversor.</li>
+      <li>Ajusta con llave o destornillador cada tuerca y perno con fuerza.</li>
+    </ol>
+    <div class="callout ok">
+      <strong>Resultado esperado</strong>
+      La línea de potencia queda armada pero <strong>sin energía</strong>, porque el breaker de 63 A sigue abajo. El inversor todavía está apagado.
+    </div>
+    <div class="callout danger">
+      <strong>Si algo sale mal</strong>
+      Si al apretar el borne la llave resbala y toca el otro polo, se produce un cortocircuito. Antes de apretar, verifica dos veces que el breaker esté abajo y que la llave no haga puente entre positivo y negativo.
+    </div>
+  </div>
+
+  <!-- PASO 3 -->
+  <div class="step">
+    <span class="goal">PASO 3</span>
+    <h3>Conectar el Panel Solar al Controlador (con breaker de 16 A y DPS)</h3>
+    <p><strong>Objetivo:</strong> llevar la energía captada en el techo hacia el regulador, garantizando protección contra rayos y sobretensiones.</p>
+    <p><strong>Materiales:</strong> cable de 6 mm², conectores MC4 (macho/hembra), breaker CC de 16 A, protector de sobretensión (DPS) y varilla de puesta a tierra.</p>
+    <ol>
+      <li>Instala el panel solar en el techo fijándolo con soportes mecánicos angulares de hierro, orientado hacia la posición del sol del mediodía.</li>
+      <li>Conecta los cables de 6 mm² a los conectores rápidos MC4 del panel (el conector macho encaja únicamente con la hembra) y baja por la pared hacia el área del kit.</li>
+      <li>Ingresa los cables positivo y negativo a la parte superior del breaker de 16 A.</li>
+      <li>Conecta en paralelo el protector de sobretensión (DPS) a la entrada de las mismas líneas positiva y negativa.</li>
+      <li>Tiende un cable verde/amarillo desde la borna de tierra del DPS hacia una varilla metálica (jabalina) clavada firmemente en el terreno natural.</li>
+      <li>Sal con cables de 6 mm² desde la parte inferior del breaker de 16 A e ingresa a las bornas de entrada solar del controlador (identificadas con el dibujo de un panel).</li>
+    </ol>
+    <div class="callout ok">
+      <strong>Resultado esperado</strong>
+      El panel queda conectado pero aislado por el breaker de 16 A, que sigue abajo. Todavía no entra energía al controlador.
+    </div>
+    <div class="callout warn">
+      <strong>Si algo sale mal</strong>
+      Si los conectores MC4 no encajan, no los fuerces: estás intentando unir macho con macho. Si el cable de 6 mm² no llega, <strong>no</strong> lo empalmes con cable más fino; usa una tirada completa de 6 mm².
+    </div>
+  </div>
+
+  <!-- PASO 4 -->
+  <div class="step">
+    <span class="goal">PASO 4</span>
+    <h3>Verificación con multímetro y secuencia segura de encendido</h3>
+    <p><strong>Objetivo:</strong> validar las lecturas eléctricas antes de energizar los consumos domésticos.</p>
+    <ol>
+      <li><strong>Inspección de voltaje:</strong> configura el multímetro en corriente continua (DCV). Mide el voltaje en las bornas de entrada del panel solar en el breaker. Debe marcar entre <strong>18 V y 22 V</strong> si hay sol directo.</li>
+      <li><strong>Activación de carga solar:</strong> sube el breaker pequeño de 16 A (panel solar).</li>
+      <li><strong>Activación de potencia:</strong> sube el breaker grande de 63 A (inversor).</li>
+      <li><strong>Encendido del inversor:</strong> enciende el interruptor frontal del inversor de 1000 W.</li>
+    </ol>
+    <div class="callout ok">
+      <strong>Resultados esperados</strong>
+      <ul style="margin:.4em 0 0;">
+        <li>Tras el paso 2: la pantalla del controlador muestra una flecha o un sol parpadeando → está inyectando corriente a la batería.</li>
+        <li>Tras el paso 4: el inversor emite un pitido corto de comprobación y enciende una luz LED verde fija. Los tomacorrientes frontales ya entregan 120 V / 220 V CA.</li>
+      </ul>
+    </div>
+    <div class="callout danger">
+      <strong>Si algo sale mal</strong>
+      <ul style="margin:.4em 0 0;">
+        <li><strong>El multímetro marca 0 V en el panel:</strong> no hay sol directo, o los MC4 están mal encajados.</li>
+        <li><strong>El controlador no muestra carga:</strong> baja el breaker de 16 A y revisa polaridad del panel.</li>
+        <li><strong>El inversor pita y se apaga:</strong> la batería está por debajo de 12,0 V. Carga antes de usar.</li>
+        <li><strong>El inversor enciende LED rojo:</strong> apágalo de inmediato, hay polaridad invertida o sobrecarga.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Resumen del procedimiento</h3>
+    <ol>
+      <li><strong>Orden obligatorio:</strong> 1.º Batería al controlador, 2.º Batería al inversor, 3.º Panel solar al controlador.</li>
+      <li>El regulador debe detectar los 12 V de la batería <strong>antes</strong> de recibir carga del panel.</li>
+      <li>El DPS protege el sistema de descargas de rayos derivándolas a la tierra física.</li>
+      <li>El multímetro es la herramienta de confirmación antes de levantar cualquier breaker.</li>
+    </ol>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: ENERGÍA
+     ================================================================ -->
+<section class="panel" id="p-energia" role="tabpanel" aria-labelledby="t-energia">
+
+  <h1>Gestión de energía, consumos y optimización</h1>
+  <p class="lead">De nada sirve un kit bien cableado si lo usas mal. Aquí está el límite real de tu sistema.</p>
+
+  <h2>¿Cómo funciona de día y de noche?</h2>
+  <div class="grid two">
+    <div class="card">
+      <h3>☀️ Funcionamiento diurno (con sol)</h3>
+      <p>Al mediodía el panel genera aproximadamente <strong>118 W continuos</strong>. Si la suma de los aparatos encendidos es <strong>menor a 118 W</strong>, el panel los alimenta directamente y la batería permanece cargada al 100 % para la noche.</p>
+    </div>
+    <div class="card">
+      <h3>🌙 Funcionamiento nocturno (sin sol)</h3>
+      <p>El panel no produce energía. Todos los consumos dependen al <strong>100 % de la batería</strong>. Aquí no hay excepciones ni magia: lo que gastes, sale del tanque.</p>
+    </div>
+  </div>
+
+  <h2>El cálculo de la batería</h2>
+  <div class="diagram">  Capacidad total teórica  : 12 V × 60 Ah = 720 Wh
+  Límite seguro de descarga: 50 % máximo  = 360 Wh útiles
+  Autoconsumo del inversor : −10 W por cada hora encendido</div>
+
+  <div class="callout danger">
+    <strong>Advertencia sobre las baterías de plomo</strong>
+    Si descargas la batería de ciclo profundo por debajo del 50 % (menos de 12,0 V en reposo) de forma recurrente, reduces su vida útil de <strong>500 ciclos a menos de 200 noches</strong>.
+  </div>
+
+  <h2>Consumo medido aparato por aparato</h2>
+  <p>Mediciones reales tomadas con pinza amperimétrica en la salida del kit:</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Electrodoméstico / Equipo</th><th>Consumo</th><th>Compatibilidad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 foco LED de casa</td><td class="num">9 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Router + módem de fibra óptica</td><td class="num">11 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Cargador de celular</td><td class="num">6 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Laptop en carga</td><td class="num">45 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Televisor LED de 32"</td><td class="num">46 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Ventilador de pie (velocidad 1)</td><td class="num">31 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Ventilador de pie (velocidad 2)</td><td class="num">48 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Máquina de coser de taller</td><td class="num">85 W</td><td>Totalmente compatible</td></tr>
+        <tr><td>Licuadora de cocina</td><td class="num">380 W</td><td>Uso breve (1 a 2 min)</td></tr>
+        <tr><td>Taladro de mano</td><td class="num">600 W</td><td>Uso breve (trabajos puntuales)</td></tr>
+        <tr><td>Refrigerador / heladera</td><td class="num">110 W (850 W de arranque)</td><td>Solo por ratos breves</td></tr>
+        <tr class="row-danger"><td>Microondas</td><td class="num">&gt;1000 W</td><td>ESTRICTAMENTE PROHIBIDO</td></tr>
+        <tr class="row-danger"><td>Plancha de ropa</td><td class="num">1100 W</td><td>ESTRICTAMENTE PROHIBIDO</td></tr>
+        <tr class="row-danger"><td>Pava / hervidor eléctrico</td><td class="num">&gt;1200 W</td><td>ESTRICTAMENTE PROHIBIDO</td></tr>
+        <tr class="row-danger"><td>Aire acondicionado</td><td class="num">&gt;1000 W</td><td>ESTRICTAMENTE PROHIBIDO</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <strong>La regla de oro de los consumos</strong>
+    Todo aparato que <strong>calienta por resistencia eléctrica</strong> (microondas, plancha, pava, secador de pelo, aire acondicionado) queda prohibido. Consume más que todo el kit junto.
+  </div>
+
+  <h2>Caso práctico: el error de la primera noche de Doña Carmen</h2>
+
+  <div class="card">
+    <h4>La situación</h4>
+    <p>Doña Carmen (68 años) necesita energía para trabajar en su máquina de coser y sobrellevar cortes de luz de 4 horas (de 18:00 a 22:00 h).</p>
+
+    <h4>El error de la primera noche</h4>
+    <p>Durante el corte encendió simultáneamente:</p>
+    <ul>
+      <li>3 focos LED → 27 W</li>
+      <li>Router → 11 W</li>
+      <li>TV de 32" → 46 W</li>
+      <li>Ventilador velocidad 2 → 48 W</li>
+      <li>Máquina de coser → 85 W</li>
+      <li>Autoconsumo e ineficiencia del inversor → ~18 W</li>
+    </ul>
+    <p><strong>Total consumido de noche: 155 W sostenidos.</strong></p>
+    <div class="callout danger">
+      <strong>Resultado</strong>
+      La batería entregó 155 W cada hora. A las 2 horas y 20 minutos el inversor comenzó a pitar y se apagó por bajo voltaje. La batería cayó a <strong>10,5 V</strong> (descarga profunda crítica).
+    </div>
+
+    <h4>La solución de $12: optimización directa en CC</h4>
+    <ol>
+      <li><strong>Conexión directa a 12 V:</strong> se conectaron 2 focos LED especiales de 12 V y el router directamente a la salida de corriente continua de 12 V del <strong>controlador de carga</strong>. Esto permitió apagar el inversor cuando no se usaba la TV o la máquina, ahorrando los 10 W de autoconsumo y las ineficiencias de conversión.</li>
+      <li><strong>Ajuste del ventilador:</strong> se redujo a velocidad 1 (el consumo bajó de 48 W a 31 W).</li>
+      <li><strong>Uso racional de la TV:</strong> se encendió solo 1 hora para el noticiero y luego se apagó el inversor.</li>
+    </ol>
+
+    <div class="callout ok">
+      <strong>Resultado de la segunda noche</strong>
+      Tras un corte de 4 horas completas, al retornar la red de servicio la batería marcaba <strong>12,2 V en reposo (59 % de reserva restante)</strong>. La batería no sufrió degradación y se recargó al 100 % al mediodía siguiente.
+    </div>
+  </div>
+
+  <h2>Ampliación futura del kit</h2>
+  <div class="diagram">  PASO 1: Sumar un segundo panel igual de 150 W EN PARALELO.
+          (El mismo regulador de 40 A soporta hasta 3 paneles de 150 W)
+
+  PASO 2: Sumar una segunda batería idéntica de 60 Ah EN PARALELO.
+
+  NOTA  : NUNCA agregar baterías antes de ampliar la capacidad de paneles.</div>
+
+  <h3>Cómo agregar un segundo panel solar (en paralelo)</h3>
+  <div class="card">
+    <p>Si necesitas recargar la batería más rápido en días nublados o duplicar la potencia diurna a <strong>236 W reales</strong>, puedes adquirir un segundo panel de 150 W.</p>
+    <ul>
+      <li><strong>Modo correcto (en paralelo):</strong> conecta el positivo del Panel 1 con el positivo del Panel 2, y el negativo del Panel 1 con el negativo del Panel 2, usando un <strong>conector en Y (paralelo)</strong>.</li>
+      <li><strong>Por qué NO conectarlos en serie con este regulador:</strong> en serie (positivo de uno con negativo del otro) el voltaje se duplica a 36 V. Un controlador tipo PWM desperdicia ese exceso de voltaje y rinde como si tuvieras un solo panel.</li>
+      <li><strong>Límite del kit:</strong> el regulador PWM de 40 A soporta hasta <strong>3 paneles de 150 W en paralelo</strong>. Si quieres paneles más grandes (300 W o 400 W), debes reemplazar el regulador PWM por uno de tecnología <strong>MPPT</strong>.</li>
+    </ul>
+  </div>
+
+  <h3>¿Qué cambia realmente con un segundo panel?</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th></th><th>Con 1 panel</th><th>Con 2 paneles</th></tr></thead>
+      <tbody>
+        <tr><td>Generación real al mediodía</td><td class="num">118 W</td><td class="num">236 W</td></tr>
+        <tr><td>Espacio de trabajo completo</td><td class="row-danger">Se extrae de la batería</td><td class="row-ok">Cubierto por el sol</td></tr>
+        <tr><td>Refrigerador de día</td><td class="row-danger">No alcanza</td><td class="row-ok">Sí, con 126 W sobrantes</td></tr>
+        <tr><td>Reserva nocturna</td><td class="num">360 Wh</td><td class="num">360 Wh (no cambia)</td></tr>
+        <tr><td>Potencia máxima del inversor</td><td class="num">1000 W</td><td class="num">1000 W (no cambia)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Qué puedes conectar de día con 2 paneles (236 W reales)</h3>
+    <ul>
+      <li><strong>Espacio de trabajo completo a la vez:</strong> máquina de coser (85 W) + TV 32" (46 W) + ventilador vel. 1 (31 W) + carga de laptop (45 W) + router Wi-Fi (11 W) + focos LED (27 W) = <strong>~245 W totales</strong>.</li>
+      <li><strong>Refrigerador de día:</strong> un refrigerador pequeño o mediano consume en promedio 110 W continuos cuando el compresor marcha. Con dos paneles el sol lo alimenta por completo y todavía quedan unos <strong>126 W sobrantes</strong> para cargar la batería al 100 %.</li>
+      <li><strong>Días nublados:</strong> con nubes intermitentes, un solo panel puede quedarse corto para llenar la batería; con dos aseguras llegar a la noche con la batería llena.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Resumen del capítulo</h3>
+    <ul>
+      <li>La capacidad segura de la batería por noche es de <strong>360 Wh</strong> (50 % de descarga).</li>
+      <li>Apaga el inversor si solo necesitas luces y router; usa la salida directa de 12 V del controlador.</li>
+      <li>Prohibido conectar aparatos con resistencia de calor (microondas, planchas, pavas, secadores).</li>
+      <li>Para ampliar: primero <strong>paneles en paralelo</strong>, después <strong>baterías en paralelo</strong>.</li>
+      <li>El regulador PWM de 40 A admite hasta 3 paneles de 150 W.</li>
+    </ul>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: PRÁCTICA
+     ================================================================ -->
+<section class="panel" id="p-practica" role="tabpanel" aria-labelledby="t-practica">
+
+  <h1>Práctica: ejercicios y checklist</h1>
+  <p class="lead">Pon a prueba lo aprendido. Cada ejercicio tiene su solución explicada.</p>
+
+  <h2>Ejercicio 1 — Autonomía con inversor apagado</h2>
+  <div class="card">
+    <p>Tienes encendidos durante la noche 2 focos de 12 V (18 W totales) y un router (11 W) conectados a la salida de 12 V del controlador, con el inversor apagado. <strong>¿Cuántas horas continuas puede mantener esta carga la batería de 60 Ah sin superar el límite del 50 % de descarga (360 Wh)?</strong></p>
+    <details>
+      <summary>Ver solución explicada</summary>
+      <div class="details-body">
+        <ol>
+          <li>Consumo total = 18 W + 11 W = <strong>29 W</strong>.</li>
+          <li>Como el inversor está apagado, el autoconsumo es <strong>0 W</strong>.</li>
+          <li>Capacidad disponible = <strong>360 Wh</strong>.</li>
+          <li>Tiempo de autonomía = 360 Wh ÷ 29 W = <strong>12,41 horas</strong>.</li>
+        </ol>
+        <div class="callout ok">
+          <strong>Respuesta</strong>
+          El kit mantendrá el servicio durante <strong>más de 12 horas continuas</strong>, cubriendo toda la noche sin degradar la batería.
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <h2>Ejercicio 2 — El cable delgado que se calienta</h2>
+  <div class="card">
+    <p>Un usuario conecta un inversor a la batería usando cable delgado de timbre (1,5 mm²) en lugar de cable de 16 mm². Al encender un ventilador de 48 W, el cable se calienta intensamente al tacto. <strong>Explica por qué ocurre esto.</strong></p>
+    <details>
+      <summary>Ver solución explicada</summary>
+      <div class="details-body">
+        <p>Al trabajar con un voltaje bajo (12 V), para entregar potencia hacia el inversor se requiere transportar una elevada cantidad de amperaje:</p>
+        <p style="text-align:center;"><strong>Corriente = Potencia ÷ Voltaje</strong></p>
+        <p>Un cable delgado de 1,5 mm² opone una <strong>resistencia eléctrica alta</strong> a ese flujo de electrones, transformando la energía eléctrica en calor (<strong>Efecto Joule</strong>).</p>
+        <div class="callout ok">
+          <strong>Solución</strong>
+          Usar cable de <strong>16 mm²</strong> reduce la resistencia a niveles seguros y mantiene el cable frío.
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <h2>Ejercicio 3 — Tu propio cálculo de noche</h2>
+  <div class="card">
+    <p>Quieres encender durante un apagón: 2 focos LED de 120 V (18 W totales) + TV de 32" (46 W) durante 2 horas. El resto del tiempo solo el router (11 W) por la salida de 12 V. ¿Cómo lo organizarías para no bajar de 12,0 V?</p>
+    <details>
+      <summary>Ver solución explicada</summary>
+      <div class="details-body">
+        <p><strong>Paso 1 — Calcula el gasto con inversor encendido (TV):</strong></p>
+        <ul>
+          <li>TV 46 W + focos 18 W + autoconsumo del inversor 10 W = <strong>74 W</strong>.</li>
+          <li>Durante 2 horas = 74 W × 2 h = <strong>148 Wh</strong>.</li>
+        </ul>
+        <p><strong>Paso 2 — Calcula el gasto con inversor apagado:</strong></p>
+        <ul>
+          <li>Router 11 W por la salida de 12 V directa = <strong>11 W</strong> (sin autoconsumo).</li>
+          <li>Si quedan 6 horas de apagón: 11 W × 6 h = <strong>66 Wh</strong>.</li>
+        </ul>
+        <p><strong>Paso 3 — Total:</strong> 148 Wh + 66 Wh = <strong>214 Wh</strong>.</p>
+        <div class="callout ok">
+          <strong>Respuesta</strong>
+          214 Wh está por debajo del límite de 360 Wh. La batería queda con holgura y no se degrada.
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <h2>Checklist de aprendizaje</h2>
+  <p>Marca cada punto a medida que lo domines. Tu progreso se guarda automáticamente en este navegador.</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Progreso de aprendizaje: <strong id="checkPct">0 %</strong></div>
+    <div class="progress-track"><span id="checkFill"></span></div>
+  </div>
+
+  <ul class="check-list">
+    <li>
+      <input type="checkbox" id="ck-p1" data-key="p1">
+      <label for="ck-p1">Sé nombrar los 6 componentes del kit y explicar para qué sirve cada uno.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p2" data-key="p2">
+      <label for="ck-p2">Entiendo por qué el panel de 150 W entrega solo 118 W reales al mediodía.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p3" data-key="p3">
+      <label for="ck-p3">Puedo explicar la diferencia entre una batería de auto y una de ciclo profundo.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p4" data-key="p4">
+      <label for="ck-p4">Conozco las 3 reglas de oro de seguridad y por qué existen.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p5" data-key="p5">
+      <label for="ck-p5">Memorizo el orden obligatorio: batería→controlador, batería→inversor, panel→controlador.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p6" data-key="p6">
+      <label for="ck-p6">Sé qué grosor de cable va en cada tramo (6, 10 y 16 mm²).</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p7" data-key="p7">
+      <label for="ck-p7">Puedo calcular los 360 Wh útiles de la batería y repartir mis consumos nocturnos.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p8" data-key="p8">
+      <label for="ck-p8">Sé qué aparatos están estrictamente prohibidos y por qué.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p9" data-key="p9">
+      <label for="ck-p9">Entiendo cómo ampliar el kit: primero paneles en paralelo, después baterías.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-p10" data-key="p10">
+      <label for="ck-p10">Me siento capaz de hacer la inspección con multímetro antes de levantar breakers.</label>
+    </li>
+  </ul>
+
+  <h2>Prompts para seguir aprendiendo con IA</h2>
+  <p>Copia y pega estos prompts en tu asistente de IA preferido para adaptar el sistema a tu caso concreto.</p>
+
+  <div class="copy-wrap">
+    <pre class="copy-src">Actúa como un ingeniero especialista en energía solar fotovoltaica aislada. Tengo una batería de 12 V y 60 Ah con un límite de descarga del 50% (360 Wh útiles). Deseo conectar los siguientes aparatos durante un apagón nocturno: [INSERTAR LISTA DE APARATOS Y SUS WATTS]. Calcula el consumo hora por hora, determina cuántas horas durará la batería y dime si requiero apagar algún equipo para no dañarla.</pre>
+    <button class="copyBtn" type="button">COPIAR</button>
+  </div>
+
+  <div class="copy-wrap">
+    <pre class="copy-src">Actúa como un técnico electricista experto en instalaciones solares CC. Voy a realizar la instalación de un kit de 12 V con un inversor de [INSERTAR WATTS] y un regulador de [INSERTAR AMPERES]. Revisa si mis selecciones de cables ([mm²]) y breakers ([Amperes]) son seguras para prevenir caídas de tensión e incendios. Explícame el orden exacto de conexión.</pre>
+    <button class="copyBtn" type="button">COPIAR</button>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: ERRORES
+     ================================================================ -->
+<section class="panel" id="p-errores" role="tabpanel" aria-labelledby="t-errores">
+
+  <h1>Errores frecuentes y cómo corregirlos</h1>
+  <p class="lead">Casi todos los fallos de este kit vienen de repetir los mismos cinco o seis errores. Aquí están todos, con su corrección.</p>
+
+  <h2>Tabla comparativa: correcto vs. incorrecto</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Situación</th><th>❌ Incorrecto</th><th>✅ Correcto</th><th>Consecuencia del error</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Orden de conexión</td>
+          <td>Panel al controlador antes que la batería</td>
+          <td>Batería al controlador primero</td>
+          <td>El controlador no detecta el voltaje y se daña o descalibra</td>
+        </tr>
+        <tr>
+          <td>Polaridad</td>
+          <td>Cruzar + y − entre batería e inversor</td>
+          <td>Positivo con positivo, negativo con negativo</td>
+          <td>Cortocircuito directo: derrite metal en milisegundos</td>
+        </tr>
+        <tr>
+          <td>Terminales</td>
+          <td>Cable pelado enroscado a mano en el borne</td>
+          <td>Terminal de ojal ponchado y bien apretado</td>
+          <td>Falso contacto → chispa → punto caliente → incendio</td>
+        </tr>
+        <tr>
+          <td>Grosor de cable</td>
+          <td>Cable de 1,5 mm² entre batería e inversor</td>
+          <td>Cable de 16 mm² entre batería e inversor</td>
+          <td>Efecto Joule: el cable se calienta y quema la aislación</td>
+        </tr>
+        <tr>
+          <td>Breakers</td>
+          <td>Instalar con los breakers arriba (encendidos)</td>
+          <td>Todos abajo hasta terminar la inspección</td>
+          <td>Chispazos y arcos eléctricos mientras manipulas cables</td>
+        </tr>
+        <tr>
+          <td>Batería</td>
+          <td>Usar batería de auto</td>
+          <td>Usar batería de ciclo profundo</td>
+          <td>La batería de auto muere en semanas de uso solar</td>
+        </tr>
+        <tr>
+          <td>Descarga</td>
+          <td>Bajar de 12,0 V noche tras noche</td>
+          <td>No pasar del 50 % (360 Wh)</td>
+          <td>La vida útil cae de 500 ciclos a menos de 200</td>
+        </tr>
+        <tr>
+          <td>Consumos</td>
+          <td>Conectar microondas, plancha, pava o aire</td>
+          <td>Solo aparatos de bajo consumo o uso breve</td>
+          <td>Apagón del inversor y daño a la batería</td>
+        </tr>
+        <tr>
+          <td>Ampliación</td>
+          <td>Paneles en serie con regulador PWM</td>
+          <td>Paneles en paralelo con regulador PWM</td>
+          <td>El exceso de voltaje se desperdicia: rinde como uno solo</td>
+        </tr>
+        <tr>
+          <td>Ampliación</td>
+          <td>Agregar una batería antes de ampliar paneles</td>
+          <td>Primero más paneles, después más baterías</td>
+          <td>La batería nunca se recarga completa y se sulfata</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Checklist: errores que NUNCA debes cometer</h2>
+  <ul class="check-list">
+    <li>
+      <input type="checkbox" id="ck-e1" data-key="e1">
+      <label for="ck-e1"><strong>NUNCA</strong> conectar el panel solar al controlador antes de conectar la batería.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-e2" data-key="e2">
+      <label for="ck-e2"><strong>NUNCA</strong> cruzar los cables positivo (+) y negativo (−) entre la batería y el inversor.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-e3" data-key="e3">
+      <label for="ck-e3"><strong>NUNCA</strong> usar cables pelados enroscados en lugar de terminales de ojal bien apretados.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-e4" data-key="e4">
+      <label for="ck-e4"><strong>NUNCA</strong> conectar electrodomésticos de resistencia térmica (microondas, planchas, duchas, pavas eléctricas).</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-e5" data-key="e5">
+      <label for="ck-e5"><strong>NUNCA</strong> descargar la batería por debajo de 12,0 V (más del 50 % de su capacidad).</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-e6" data-key="e6">
+      <label for="ck-e6"><strong>NUNCA</strong> realizar la instalación con los breakers en posición de encendido (arriba).</label>
+    </li>
+  </ul>
+
+  <h2>Diagnóstico rápido de fallas</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Síntoma</th><th>Causa más probable</th><th>Qué hacer</th></tr></thead>
+      <tbody>
+        <tr><td>El controlador no enciende</td><td>Cable de batería flojo o mal polarizado</td><td>Verifica bornes y polaridad con multímetro</td></tr>
+        <tr><td>El controlador no muestra carga solar</td><td>Breaker de 16 A abajo, o MC4 mal encajado</td><td>Sube el breaker y revisa los conectores MC4</td></tr>
+        <tr><td>El inversor pita y se apaga</td><td>Batería por debajo de 12,0 V</td><td>Apaga consumos y deja cargar al sol</td></tr>
+        <tr><td>El cable del inversor se calienta</td><td>Grosor insuficiente (menos de 16 mm²)</td><td>Reemplaza por cable de 16 mm² con ojal</td></tr>
+        <tr><td>El inversor enciende LED rojo</td><td>Polaridad invertida o sobrecarga</td><td>Apaga de inmediato y revisa el cableado</td></tr>
+        <tr><td>La batería dura muy poco</td><td>Descargas profundas repetidas</td><td>Limita a 360 Wh por noche y revisa 12,0 V</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: RESUMEN
+     ================================================================ -->
+<section class="panel" id="p-resumen" role="tabpanel" aria-labelledby="t-resumen">
+
+  <h1>Resumen general</h1>
+
+  <h2>Todo lo aprendido en 5 puntos</h2>
+  <div class="card">
+    <ol>
+      <li>Se instala un kit solar completo y funcional por <strong>$250</strong>, compuesto por 6 elementos básicos.</li>
+      <li>Un panel de 150 W entrega en uso real <strong>118 W continuos</strong> al mediodía por efectos de temperatura.</li>
+      <li>El orden de cableado es vital: primero se conecta la <strong>batería al controlador</strong> para fijar el voltaje de trabajo en 12 V.</li>
+      <li>La batería de ciclo profundo de 60 Ah dispone de <strong>360 Wh de uso seguro</strong> por noche sin comprometer su vida útil.</li>
+      <li>Conectar dispositivos directamente a la salida de <strong>12 V del regulador</strong> ahorra el autoconsumo del inversor (10 W continuos).</li>
+    </ol>
+  </div>
+
+  <h2>Conceptos clave</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Concepto</th><th>Qué significa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Corriente Continua (CC)</strong></td><td>Electricidad producida por paneles y baterías, donde los electrones fluyen en una sola dirección.</td></tr>
+        <tr><td><strong>Corriente Alterna (CA)</strong></td><td>Electricidad producida por el inversor para los tomacorrientes del hogar.</td></tr>
+        <tr><td><strong>Ciclo Profundo</strong></td><td>Batería optimizada para descargas prolongadas y continuas.</td></tr>
+        <tr><td><strong>PWM</strong></td><td>Modulación por Ancho de Pulsos: controlador de carga económico que regula la tensión enviada a la batería.</td></tr>
+        <tr><td><strong>Autoconsumo del inversor</strong></td><td>Energía que consume el inversor por el solo hecho de estar encendido (10 W).</td></tr>
+        <tr><td><strong>Conexión en paralelo</strong></td><td>Unión de positivos con positivos y negativos con negativos; mantiene el voltaje y suma la corriente.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Glosario de términos técnicos</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Término</th><th>Definición</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ampere (A)</strong></td><td>Unidad de medida de la intensidad de la corriente eléctrica.</td></tr>
+        <tr><td><strong>Ampere-hora (Ah)</strong></td><td>Medida de la capacidad de almacenamiento de carga de una batería a lo largo del tiempo.</td></tr>
+        <tr><td><strong>Breaker (termomagnético)</strong></td><td>Dispositivo de seguridad que corta automáticamente el paso de energía ante una sobrecarga o cortocircuito.</td></tr>
+        <tr><td><strong>DPS</strong></td><td>Dispositivo de Protección contra Sobretensiones: deriva a tierra picos indeseados de voltaje producidos por descargas atmosféricas o rayos.</td></tr>
+        <tr><td><strong>Inversor de corriente</strong></td><td>Equipo electrónico que convierte Corriente Continua (CC) en Corriente Alterna (CA).</td></tr>
+        <tr><td><strong>Multímetro (tester)</strong></td><td>Instrumento portátil para medir voltaje, corriente y resistencia en circuitos eléctricos.</td></tr>
+        <tr><td><strong>Volt (V)</strong></td><td>Unidad de medida del potencial o tensión eléctrica.</td></tr>
+        <tr><td><strong>Watt (W)</strong></td><td>Unidad de medida de la potencia eléctrica (energía consumida o generada por segundo).</td></tr>
+        <tr><td><strong>Watt-hora (Wh)</strong></td><td>Cantidad total de energía consumida o producida durante una hora.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Verificación final antes de energizar</h2>
+  <ul class="check-list">
+    <li>
+      <input type="checkbox" id="ck-f1" data-key="f1">
+      <label for="ck-f1">Todos los breakers están abajo (apagados).</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-f2" data-key="f2">
+      <label for="ck-f2">La batería está conectada al controlador y la pantalla muestra el voltaje.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-f3" data-key="f3">
+      <label for="ck-f3">Todos los terminales de ojal están ponchados y apretados con llave.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-f4" data-key="f4">
+      <label for="ck-f4">La polaridad está verificada dos veces en cada tramo.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-f5" data-key="f5">
+      <label for="ck-f5">El DPS está conectado a la varilla de tierra física.</label>
+    </li>
+    <li>
+      <input type="checkbox" id="ck-f6" data-key="f6">
+      <label for="ck-f6">El multímetro marca entre 18 V y 22 V en la entrada del panel con sol directo.</label>
+    </li>
+  </ul>
+
+  <div class="progress-box">
+    <div class="progress-label">Progreso total de checklists: <strong id="checkPct2">0 %</strong></div>
+    <div class="progress-track"><span id="checkFill2"></span></div>
+  </div>
+
+  <h2>Recomendaciones para seguir aprendiendo</h2>
+  <div class="card">
+    <ol>
+      <li>Adquiere una <strong>pinza amperimétrica de Corriente Continua (CC)</strong> para medir consumos reales de tu hogar línea por línea.</li>
+      <li>Estudia la tecnología de controladores <strong>MPPT</strong> para proyectos de mayor escala con paneles de más de 300 W.</li>
+      <li>Practica el armado de líneas dedicadas de iluminación en 12 V CC para independizar la iluminación básica del inversor.</li>
+    </ol>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: FUENTES
+     ================================================================ -->
+<section class="panel" id="p-fuentes" role="tabpanel" aria-labelledby="t-fuentes">
+
+  <h1>Fuentes</h1>
+  <p class="lead">Material de origen utilizado para construir este tutorial.</p>
+
+  <h2>Video de YouTube</h2>
+  <div class="card">
+    <p><strong>Título:</strong> Kit Solar BARATO que Prende Casi TODO en tu Casa ($250)</p>
+    <p><strong>Canal:</strong> Claudio Mendoza Constructor</p>
+    <p><strong>Enlace URL:</strong></p>
+    <div class="copy-wrap">
+      <pre class="copy-src">https://youtube.com/watch?v=Np2dPrjdVi8&amp;is=qyxGLQIF920GGP8p</pre>
+      <button class="copyBtn" type="button">COPIAR</button>
+    </div>
+  </div>
+
+  <h2>Apuntes y notas técnicas de instalación</h2>
+  <div class="card">
+    <p><strong>Documento:</strong> "INSTALACIÓN Y CABLEADO"</p>
+    <p><strong>Contenido:</strong> notas sobre secuencia de montaje, grosores de cable y protecciones.</p>
+    <p><strong>Documento:</strong> "URL DEL VIDEO"</p>
+    <p><strong>Contenido:</strong> registro de la fuente original.</p>
+  </div>
+
+  <h2>Listado completo de URLs</h2>
+  <p>Copia cualquier enlace con su botón.</p>
+
+  <div class="copy-wrap">
+    <pre class="copy-src">https://youtube.com/watch?v=Np2dPrjdVi8&amp;is=qyxGLQIF920GGP8p</pre>
+    <button class="copyBtn" type="button">COPIAR</button>
+  </div>
+
+  <div class="callout">
+    <strong>Sobre el uso de estas fuentes</strong>
+    Todo el contenido técnico de este tutorial (precios, potencias, grosores de cable, consumos medidos y el caso práctico) proviene del material de origen. La reorganización, explicaciones, ejemplos, ejercicios y verificaciones son trabajo de edición pedagógica.
+  </div>
+
+</section>
+
+<!-- ================================================================
+     PANEL: CRÉDITOS
+     ================================================================ -->
+<section class="panel" id="p-creditos" role="tabpanel" aria-labelledby="t-creditos">
+
+  <h2>CRÉDITOS</h2>
+
+  <div class="hero-svg-mount" data-svg-hero="true" role="img"
+       aria-label="Esquema animado: el sol ilumina el panel solar, la energía viaja por el cable hasta el controlador de carga, carga la batería y finalmente alimenta la casa."></div>
+  <p class="hero-caption">El mismo esquema animado que abre el tutorial: sol → panel → controlador → batería → casa.</p>
+
+  <div class="author-card">
+    <h3 class="author-name">Rubén Sbarsky</h3>
+    <p class="author-role">Autor del tutorial</p>
+    <dl class="meta">
+      <div>
+        <dt>Fecha y hora de creación</dt>
+        <dd>08/10/2026 — 10:47:12</dd>
+      </div>
+      <div>
+        <dt>Versión del archivo</dt>
+        <dd>V001</dd>
+      </div>
+      <div>
+        <dt>Nombre del archivo</dt>
+        <dd>tutorial_kit_solar_V001.html</dd>
+      </div>
+      <div>
+        <dt>Formato</dt>
+        <dd>HTML único — sin dependencias externas, funciona sin conexión</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="card">
+    <h3>Sobre este tutorial</h3>
+    <p>Tutorial interactivo de una sola página, construido íntegramente con HTML, CSS, JavaScript y SVG embebidos. No usa CDN, librerías externas, fuentes externas ni peticiones de red.</p>
+    <p>El esquema animado que aparece arriba y en la portada es <strong>exactamente el mismo dibujo</strong>, generado desde una única plantilla y montado con identificadores únicos en cada copia.</p>
+  </div>
+
+  <div class="card">
+    <h3>Funciones incluidas</h3>
+    <ul>
+      <li>Pestañas reales con panel activo destacado.</li>
+      <li>Buscador con resaltado de coincidencias.</li>
+      <li>Control de tamaño de texto (A− / A+).</li>
+      <li>Tema oscuro y tema claro, con preferencia guardada.</li>
+      <li>Imprimir / guardar como PDF con hoja de impresión completa.</li>
+      <li>Barra de progreso de lectura y botón volver arriba.</li>
+      <li>Checklists con progreso guardado en <code>localStorage</code>.</li>
+      <li>Botones COPIAR para prompts y bloques de URL.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Novedades de esta versión (V001)</h3>
+    <ul>
+      <li>Primera entrega del tutorial completo.</li>
+      <li>SVG animado único, reutilizado en INICIO y en CRÉDITOS mediante plantilla con <code>innerHTML</code> e identificadores únicos por copia.</li>
+      <li>Red de seguridad que vuelve a montar el SVG si el contenedor queda vacío.</li>
+      <li>Plan B con imagen <code>data:</code> si el reloj de la animación no avanza.</li>
+      <li>Hoja <code>@media print</code> completa: los SVG de todas las pestañas se montan antes de imprimir.</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<!-- ============================================================
+     BOTÓN VOLVER ARRIBA
+     ============================================================ -->
+<button class="to-top no-print" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+
+<!-- ============================================================
+     SVG FUENTE (oculto). Se extrae la plantilla y se elimina del DOM.
+     ============================================================ -->
+<svg id="svgHeroSource" width="0" height="0" aria-hidden="true" focusable="false"
+     style="position:absolute;left:-9999px;top:0;width:0;height:0;overflow:hidden">
+  <defs>
+    <linearGradient id="gBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1222"/>
+      <stop offset="100%" stop-color="#132a45"/>
+    </linearGradient>
+    <linearGradient id="gAcc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="gPanel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#123a5c"/>
+      <stop offset="100%" stop-color="#0b2540"/>
+    </linearGradient>
+    <filter id="fGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="clipPanel">
+      <rect x="150" y="92" width="170" height="96" rx="6"/>
+    </clipPath>
+  </defs>
+
+  <g id="svgHero">
+
+    <!-- Fondo -->
+    <rect x="0" y="0" width="820" height="260" rx="18" fill="url(#gBg)"/>
+    <rect x="1" y="1" width="818" height="258" rx="17" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+
+    <!-- Sol -->
+    <g>
+      <circle cx="85" cy="68" r="26" fill="url(#gAcc)" filter="url(#fGlow)">
+        <animate attributeName="r" values="24;29;24" dur="3.4s" repeatCount="indefinite"/>
+      </circle>
+      <g stroke="#fbbf24" stroke-width="3" stroke-linecap="round" opacity="0.85">
+        <animateTransform attributeName="transform" type="rotate" from="0 85 68" to="360 85 68" dur="20s" repeatCount="indefinite"/>
+        <line x1="85" y1="32" x2="85" y2="16"/>
+        <line x1="85" y1="104" x2="85" y2="120"/>
+        <line x1="49" y1="68" x2="33" y2="68"/>
+        <line x1="121" y1="68" x2="137" y2="68"/>
+        <line x1="59.5" y1="42.5" x2="48.2" y2="31.2"/>
+        <line x1="110.5" y1="42.5" x2="121.8" y2="31.2"/>
+        <line x1="59.5" y1="93.5" x2="48.2" y2="104.8"/>
+        <line x1="110.5" y1="93.5" x2="121.8" y2="104.8"/>
+      </g>
+    </g>
+
+    <!-- Cables (se dibujan antes que las cajas) -->
+    <g stroke="#2b6ea8" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9">
+      <path d="M 322 140 L 392 140"/>
+      <path d="M 464 140 L 512 140"/>
+      <path d="M 650 140 L 680 140"/>
+    </g>
+
+    <!-- Puntos de energía en movimiento -->
+    <g fill="#38bdf8" filter="url(#fGlow)">
+      <circle r="5">
+        <animateMotion path="M 322 140 L 392 140" dur="1.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="4">
+        <animateMotion path="M 322 140 L 392 140" dur="1.4s" begin="0.7s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.7s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="5">
+        <animateMotion path="M 464 140 L 512 140" dur="1.4s" begin="0.35s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.35s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="4">
+        <animateMotion path="M 464 140 L 512 140" dur="1.4s" begin="1.05s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="1.05s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="5" fill="#fbbf24">
+        <animateMotion path="M 650 140 L 680 140" dur="1.4s" begin="0.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="4" fill="#fbbf24">
+        <animateMotion path="M 650 140 L 680 140" dur="1.4s" begin="0.9s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.9s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- Panel solar -->
+    <g transform="rotate(-10 235 142)">
+      <rect x="150" y="92" width="170" height="96" rx="6" fill="url(#gPanel)" stroke="#38bdf8" stroke-width="2"/>
+      <g stroke="#2b6ea8" stroke-width="1" opacity="0.8">
+        <line x1="184" y1="94" x2="184" y2="186"/>
+        <line x1="218" y1="94" x2="218" y2="186"/>
+        <line x1="252" y1="94" x2="252" y2="186"/>
+        <line x1="286" y1="94" x2="286" y2="186"/>
+        <line x1="152" y1="124" x2="318" y2="124"/>
+        <line x1="152" y1="156" x2="318" y2="156"/>
+      </g>
+      <g clip-path="url(#clipPanel)">
+        <rect x="150" y="92" width="34" height="96" fill="#ffffff" opacity="0.16">
+          <animateTransform attributeName="transform" type="translate" values="-46 0;210 0" dur="3.6s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+      <line x1="200" y1="188" x2="180" y2="220" stroke="#64748b" stroke-width="5" stroke-linecap="round"/>
+      <line x1="270" y1="188" x2="290" y2="220" stroke="#64748b" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Controlador de carga -->
+    <g>
+      <rect x="392" y="90" width="72" height="96" rx="10" fill="#132a45" stroke="#38bdf8" stroke-width="2"/>
+      <rect x="404" y="104" width="48" height="30" rx="4" fill="#0a0e1a" stroke="#2b6ea8"/>
+      <rect x="410" y="116" width="24" height="6" rx="3" fill="#22c55e">
+        <animate attributeName="width" values="8;36;8" dur="2.6s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="418" cy="154" r="5" fill="#22c55e">
+        <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="438" cy="154" r="5" fill="#f59e0b">
+        <animate attributeName="opacity" values="0.25;1;0.25" dur="1.6s" repeatCount="indefinite"/>
+      </circle>
+      <text x="428" y="178" text-anchor="middle" font-size="10" fill="#9fb0c9" font-family="sans-serif">PWM 40A</text>
+    </g>
+
+    <!-- Batería -->
+    <g>
+      <rect x="512" y="90" width="128" height="96" rx="10" fill="#132a45" stroke="#38bdf8" stroke-width="2"/>
+      <rect x="640" y="118" width="10" height="40" rx="3" fill="#38bdf8"/>
+      <rect x="522" y="102" width="108" height="72" rx="6" fill="#0a0e1a"/>
+      <rect x="524" y="104" width="8" height="68" rx="4" fill="#22c55e">
+        <animate attributeName="width" values="6;102;102;6" keyTimes="0;0.42;0.62;1" dur="6s" repeatCount="indefinite"/>
+      </rect>
+      <text x="576" y="178" text-anchor="middle" font-size="10" fill="#9fb0c9" font-family="sans-serif">60 Ah</text>
+    </g>
+
+    <!-- Casa / consumos -->
+    <g>
+      <rect x="680" y="130" width="112" height="80" rx="4" fill="#132a45" stroke="#38bdf8" stroke-width="2"/>
+      <polygon points="668,130 736,82 804,130" fill="#1e3a5f" stroke="#38bdf8" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="700" y="148" width="28" height="28" rx="3" fill="#fbbf24">
+        <animate attributeName="opacity" values="0.45;1;0.45" dur="2.6s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="752" y="166" width="24" height="44" rx="2" fill="#0b2540" stroke="#2b6ea8"/>
+    </g>
+
+    <!-- Etiquetas -->
+    <g font-family="sans-serif" font-size="11" fill="#9fb0c9" text-anchor="middle" font-weight="600">
+      <text x="235" y="242">PANEL 150 W</text>
+      <text x="428" y="242">CONTROLADOR PWM</text>
+      <text x="576" y="242">BATERÍA 60 Ah</text>
+      <text x="736" y="242">CONSUMOS</text>
+    </g>
+
+  </g>
+</svg>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ==========================================================
+     SVG HERO — plantilla única, montaje por innerHTML
+     ========================================================== */
+  var IDS = ['gBg', 'gAcc', 'gPanel', 'fGlow', 'clipPanel'];
+  var seq = 0;
+  var TPL = null;
+  var imgMode = false;
+  var FREEZE_T = 2.0;
+
+  function template() {
+    if (TPL) { return TPL; }
+    var src = document.getElementById('svgHeroSource');
+    if (!src) { TPL = { defs: '', art: '' }; return TPL; }
+    var defsNode = src.querySelector('defs');
+    var d = defsNode ? defsNode.cloneNode(true) : document.createElement('defs');
+    var g = src.querySelector('#svgHero');
+    if (!g) { TPL = { defs: '', art: '' }; return TPL; }
+    g = g.cloneNode(true);
+    var inner = d.querySelector('#svgHero');
+    if (inner && inner.parentNode) { inner.parentNode.removeChild(inner); }
+    g.removeAttribute('id');
+    TPL = { defs: d.innerHTML, art: g.outerHTML };
+    if (src.parentNode) { src.parentNode.removeChild(src); }
+    return TPL;
+  }
+
+  function markup(uid) {
+    var t = template();
+    var s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 260" '
+          + 'preserveAspectRatio="xMidYMid meet" width="100%" aria-hidden="true" focusable="false">'
+          + '<defs>' + t.defs + '</defs>' + t.art + '</svg>';
+    for (var i = 0; i < IDS.length; i++) {
+      var id = IDS[i];
+      s = s.split('id="' + id + '"').join('id="' + id + '-' + uid + '"')
+           .split('url(#' + id + ')').join('url(#' + id + '-' + uid + ')');
+    }
+    return s;
+  }
+
+  function mountOne(m) {
+    if (!m) { return; }
+    m.textContent = '';
+
+    if (imgMode) {
+      var im = document.createElement('img');
+      im.alt = '';
+      im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(markup('i' + (++seq)));
+      m.appendChild(im);
+      return;
+    }
+
+    m.innerHTML = markup('h' + (++seq));
+    var svg = m.querySelector('svg');
+    if (!svg) { return; }
+
+    var t0 = 0;
+    try { svg.setCurrentTime(0); svg.unpauseAnimations(); } catch (e) {}
+    try { t0 = svg.getCurrentTime(); } catch (e) { t0 = 0; }
+
+    setTimeout(function () {
+      if (document.hidden) { return; }
+      if (m.querySelector('svg') !== svg) { return; }
+      var h = 0;
+      try { h = svg.getBoundingClientRect().height; } catch (e) { h = 0; }
+      if (h > 0) {
+        var t1 = 0;
+        try { t1 = svg.getCurrentTime(); } catch (e) { t1 = 0; }
+        if (t1 - t0 < 0.3) {
+          imgMode = true;
+          mountOne(m);
+        }
+      }
+    }, 1600);
+  }
+
+  function mountActive() {
+    var list = document.querySelectorAll('.panel.active [data-svg-hero]');
+    for (var i = 0; i < list.length; i++) { mountOne(list[i]); }
+  }
+
+  function mountAll() {
+    var list = document.querySelectorAll('[data-svg-hero]');
+    for (var i = 0; i < list.length; i++) { mountOne(list[i]); }
+  }
+
+  function freezeAll() {
+    var list = document.querySelectorAll('[data-svg-hero] svg');
+    for (var i = 0; i < list.length; i++) {
+      try {
+        list[i].pauseAnimations();
+        list[i].setCurrentTime(FREEZE_T);
+      } catch (e) {}
+    }
+  }
+
+  function thawAll() {
+    var list = document.querySelectorAll('[data-svg-hero] svg');
+    for (var i = 0; i < list.length; i++) {
+      try { list[i].unpauseAnimations(); } catch (e) {}
+    }
+  }
+
+  /* Red de seguridad: si el panel visible tiene el contenedor vacío, se remonta */
+  setInterval(function () {
+    if (document.hidden) { return; }
+    var list = document.querySelectorAll('.panel.active [data-svg-hero]');
+    for (var i = 0; i < list.length; i++) {
+      if (!list[i].firstElementChild) { mountOne(list[i]); }
+    }
+  }, 800);
+
+  /* ==========================================================
+     PESTAÑAS
+     ========================================================== */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+
+  function activateTab(id, opts) {
+    var found = false;
+    tabs.forEach(function (t) {
+      var on = (t.getAttribute('data-tab') === id);
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (on) { found = true; }
+    });
+    if (!found) { return; }
+
+    panels.forEach(function (p) {
+      p.classList.toggle('active', p.id === 'p-' + id);
+    });
+
+    /* Montar el SVG DESPUÉS de marcar el panel como activo */
+    mountActive();
+
+    if (!opts || !opts.noScroll) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var id = t.getAttribute('data-tab');
+      if (history.replaceState) {
+        history.replaceState(null, '', '#p-' + id);
+      }
+      activateTab(id);
+    });
+  });
+
+  function tabFromHash() {
+    var h = (location.hash || '').replace('#', '');
+    if (!h) { return null; }
+    var el = document.getElementById(h);
+    if (el && el.classList.contains('panel')) {
+      return h.replace(/^p-/, '');
+    }
+    return null;
+  }
+
+  window.addEventListener('hashchange', function () {
+    var t = tabFromHash();
+    if (t) { activateTab(t); }
+  });
+
+  /* ==========================================================
+     BOTONES DE LA BARRA
+     ========================================================== */
+  var btnSearch = document.getElementById('btnSearch');
+  var searchWrap = document.getElementById('searchWrap');
+  var searchInput = document.getElementById('searchInput');
+  var searchCount = document.getElementById('searchCount');
+
+  btnSearch.addEventListener('click', function () {
+    var hidden = searchWrap.hasAttribute('hidden');
+    if (hidden) {
+      searchWrap.removeAttribute('hidden');
+      searchInput.focus();
+    } else {
+      searchWrap.setAttribute('hidden', '');
+      clearHighlight();
+      searchCount.textContent = '';
+    }
+  });
+
+  /* Tamaño de texto */
+  var FS_KEY = 'ksolar-fs';
+  var fs = 16;
+  try {
+    var saved = parseFloat(localStorage.getItem(FS_KEY));
+    if (!isNaN(saved) && saved >= 13 && saved <= 22) { fs = saved; }
+  } catch (e) {}
+  function applyFs() {
+    document.documentElement.style.fontSize = fs + 'px';
+  }
+  applyFs();
+
+  document.getElementById('btnPlus').addEventListener('click', function () {
+    fs = Math.min(22, fs + 1);
+    applyFs();
+    try { localStorage.setItem(FS_KEY, String(fs)); } catch (e) {}
+  });
+  document.getElementById('btnMinus').addEventListener('click', function () {
+    fs = Math.max(13, fs - 1);
+    applyFs();
+    try { localStorage.setItem(FS_KEY, String(fs)); } catch (e) {}
+  });
+
+  /* Tema */
+  var TH_KEY = 'ksolar-theme';
+  var btnTheme = document.getElementById('btnTheme');
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    btnTheme.textContent = (t === 'dark') ? '🌙 TEMA' : '☀️ TEMA';
+    try { localStorage.setItem(TH_KEY, t); } catch (e) {}
+  }
+  var theme = 'dark';
+  try {
+    var st = localStorage.getItem(TH_KEY);
+    if (st === 'light' || st === 'dark') { theme = st; }
+  } catch (e) {}
+  applyTheme(theme);
+
+  btnTheme.addEventListener('click', function () {
+    theme = (theme === 'dark') ? 'light' : 'dark';
+    applyTheme(theme);
+  });
+
+  /* ==========================================================
+     BUSCADOR CON RESALTADO
+     ========================================================== */
+  function clearHighlight() {
+    var marks = document.querySelectorAll('mark.search-hl');
+    for (var i = 0; i < marks.length; i++) {
+      var mk = marks[i];
+      var p = mk.parentNode;
+      if (!p) { continue; }
+      p.replaceChild(document.createTextNode(mk.textContent), mk);
+      p.normalize();
+    }
+  }
+
+  function skipNode(node) {
+    var p = node.parentNode;
+    while (p && p.nodeType === 1) {
+      var tag = p.tagName.toLowerCase();
+      if (tag === 'script' || tag === 'style' || tag === 'textarea' || tag === 'mark') { return true; }
+      if (p.classList && (p.classList.contains('toolbar') || p.classList.contains('tabs') || p.classList.contains('search-wrap'))) { return true; }
+      p = p.parentNode;
+    }
+    return false;
+  }
+
+  function runSearch(q) {
+    clearHighlight();
+    searchCount.textContent = '';
+    if (!q || q.length < 2) { return; }
+
+    var needle = q.toLowerCase();
+    var total = 0;
+    var firstMark = null;
+    var firstPanelId = null;
+
+    panels.forEach(function (panel) {
+      var walker = document.createTreeWalker(panel, NodeFilter.SHOW_TEXT, null, false);
+      var nodes = [];
+      var n;
+      while ((n = walker.nextNode())) { nodes.push(n); }
+
+      nodes.forEach(function (node) {
+        if (!node.nodeValue) { return; }
+        if (skipNode(node)) { return; }
+        var txt = node.nodeValue;
+        var low = txt.toLowerCase();
+        var idx = low.indexOf(needle);
+        if (idx === -1) { return; }
+
+        var before = txt.slice(0, idx);
+        var mid = txt.slice(idx, idx + q.length);
+        var after = txt.slice(idx + q.length);
+
+        var frag = document.createDocumentFragment();
+        if (before) { frag.appendChild(document.createTextNode(before)); }
+        var mk = document.createElement('mark');
+        mk.className = 'search-hl';
+        mk.textContent = mid;
+        frag.appendChild(mk);
+        if (after) { frag.appendChild(document.createTextNode(after)); }
+
+        var parent = node.parentNode;
+        if (!parent) { return; }
+        parent.replaceChild(frag, node);
+
+        total++;
+        if (!firstMark) {
+          firstMark = mk;
+          firstPanelId = panel.id;
+        }
+      });
+    });
+
+    searchCount.textContent = total === 0 ? 'Sin resultados' : (total + (total === 1 ? ' coincidencia' : ' coincidencias'));
+
+    if (firstMark) {
+      var targetTab = firstPanelId ? firstPanelId.replace(/^p-/, '') : null;
+      var active = document.querySelector('.panel.active');
+      if (targetTab && (!active || active.id !== firstPanelId)) {
+        activateTab(targetTab, { noScroll: true });
+      }
+      try {
+        firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (e) {
+        firstMark.scrollIntoView();
+      }
+    }
+  }
+
+  var searchTimer = null;
+  searchInput.addEventListener('input', function () {
+    if (searchTimer) { clearTimeout(searchTimer); }
+    searchTimer = setTimeout(function () {
+      runSearch(searchInput.value.trim());
+    }, 220);
+  });
+
+  /* ==========================================================
+     COPIAR AL PORTAPAPELES
+     ========================================================== */
+  function copyFallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.left = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, ta.value.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    if (ok) { done(); }
+  }
+
+  function copyText(text, btn) {
+    var original = btn.textContent;
+    function done() {
+      btn.textContent = '¡COPIADO!';
+      btn.classList.add('ok');
+      setTimeout(function () {
+        btn.textContent = original;
+        btn.classList.remove('ok');
+      }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function () {
+        copyFallback(text, done);
+      });
+    } else {
+      copyFallback(text, done);
+    }
+  }
+
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest ? ev.target.closest('.copyBtn') : null;
+    if (!btn) { return; }
+    var wrap = btn.closest('.copy-wrap');
+    if (!wrap) { return; }
+    var src = wrap.querySelector('.copy-src');
+    if (!src) { return; }
+    copyText(src.textContent, btn);
+  });
+
+  /* ==========================================================
+     CHECKLISTS CON localStorage
+     ========================================================== */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"][data-key]'));
+
+  function loadChecks() {
+    boxes.forEach(function (b) {
+      var key = 'ksolar-ck-' + b.getAttribute('data-key');
+      var v = null;
+      try { v = localStorage.getItem(key); } catch (e) { v = null; }
+      b.checked = (v === '1');
+    });
+    updateProgress();
+  }
+
+  function updateProgress() {
+    var total = boxes.length;
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    var txt = pct + ' %';
+
+    var p1 = document.getElementById('checkPct');
+    var f1 = document.getElementById('checkFill');
+    var p2 = document.getElementById('checkPct2');
+    var f2 = document.getElementById('checkFill2');
+
+    if (p1) { p1.textContent = txt; }
+    if (f1) { f1.style.width = pct + '%'; }
+    if (p2) { p2.textContent = txt; }
+    if (f2) { f2.style.width = pct + '%'; }
+  }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      var key = 'ksolar-ck-' + b.getAttribute('data-key');
+      try {
+        if (b.checked) { localStorage.setItem(key, '1'); }
+        else { localStorage.removeItem(key); }
+      } catch (e) {}
+      updateProgress();
+    });
+  });
+
+  loadChecks();
+
+  /* ==========================================================
+     BARRA DE PROGRESO DE LECTURA Y VOLVER ARRIBA
+     ========================================================== */
+  var progressFill = document.getElementById('progressFill');
+  var toTop = document.getElementById('toTop');
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var h = doc.scrollHeight - doc.clientHeight;
+    var pct = h > 0 ? (doc.scrollTop / h) * 100 : 0;
+    if (progressFill) { progressFill.style.width = pct + '%'; }
+    if (toTop) {
+      if (doc.scrollTop > 400) { toTop.classList.add('show'); }
+      else { toTop.classList.remove('show'); }
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ==========================================================
+     IMPRIMIR / GUARDAR COMO PDF
+     ========================================================== */
+  var closedDetails = [];
+  var afterPrintFired = false;
+  var printNotice = document.getElementById('printNotice');
+
+  function openAllDetails() {
+    closedDetails = [];
+    var list = document.querySelectorAll('details');
+    for (var i = 0; i < list.length; i++) {
+      if (!list[i].open) {
+        closedDetails.push(list[i]);
+        list[i].open = true;
+      }
+    }
+  }
+
+  function restoreDetails() {
+    for (var i = 0; i < closedDetails.length; i++) {
+      closedDetails[i].open = false;
+    }
+    closedDetails = [];
+  }
+
+  function preparePrint() {
+    openAllDetails();
+    mountAll();
+    freezeAll();
+  }
+
+  function showPrintHelp() {
+    if (printNotice) { printNotice.removeAttribute('hidden'); }
+  }
+
+  window.addEventListener('beforeprint', function () {
+    afterPrintFired = false;
+    preparePrint();
+  });
+
+  window.addEventListener('afterprint', function () {
+    afterPrintFired = true;
+    thawAll();
+    restoreDetails();
+  });
+
+  document.getElementById('btnPrint').addEventListener('click', function () {
+    preparePrint();
+
+    var ok = true;
+    try {
+      window.print();
+    } catch (err) {
+      ok = false;
+      showPrintHelp();
+    }
+
+    if (ok) {
+      /* Si afterprint no se dispara (algunos visores), restauramos igual */
+      setTimeout(function () {
+        if (!afterPrintFired) {
+          thawAll();
+          restoreDetails();
+        }
+      }, 1200);
+    }
+
+    /* Aviso preventivo si estamos dentro de un iframe */
+    var inIframe = false;
+    try { inIframe = (window.self !== window.top); } catch (e) { inIframe = true; }
+    if (inIframe) { showPrintHelp(); }
+  });
+
+  /* Aviso preventivo al detectar iframe */
+  (function () {
+    var inIframe = false;
+    try { inIframe = (window.self !== window.top); } catch (e) { inIframe = true; }
+    if (inIframe && printNotice) { printNotice.removeAttribute('hidden'); }
+  })();
+
+  /* ==========================================================
+     ARRANQUE
+     ========================================================== */
+  var initial = tabFromHash() || 'inicio';
+  activateTab(initial, { noScroll: true });
+
+  /* Segundo intento por si el layout tarda un instante */
+  setTimeout(function () { mountActive(); }, 60);
+
+})();
+</script>
+</body>
+</html>
